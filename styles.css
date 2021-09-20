@@ -17,7 +17,35 @@ html, body {
     right: 16px;
     width: 200px;
     height: 50%;
-    background-color: lightgreen;
+    background-color: rgb(0, 0, 0);
+    
+}
+
+.levels table {
+    margin: 16px;
+    border-collapse: collapse;
+    width: calc(100% - 32px);
+}
+
+.levels table td {
+    color: rgb(255, 153, 0);
+}
+
+.levels table td:first-child {
+    padding-right: 16px;
+}
+
+.levels table tr:nth-last-child(5n) td {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+tr.active-level {
+    background-color: rgb(255, 153, 0);
+}
+
+tr.active-level td {
+    color: #000000;
 }
 
 .controls {

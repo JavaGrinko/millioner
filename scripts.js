@@ -21,11 +21,96 @@ const questions = [{
     answers: ['0', '1', '3', '4'],
     correctAnswerIndex: 3,
     difficalty: 0
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 1
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 2
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 3
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 4
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 5
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 6
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 7
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 8
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 9
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 10
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 11
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 12
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 13
+}, {
+    question: 'Сколько будет 2+2?',
+    answers: ['0', '1', '3', '4'],
+    correctAnswerIndex: 3,
+    difficalty: 14
 }];
+
+let currentLevel = 0;
+let currentQuestion;
 
 window.onload = () => {
     generateLevels();
-    setActiveLevel(0);
+    setActiveLevel(currentLevel);
+    setActions();
+}
+
+function setActions() {
+    document.getElementById("question-ans0").onclick = () => choiseAnswer(0);
+    document.getElementById("question-ans1").onclick = () => choiseAnswer(1);
+    document.getElementById("question-ans2").onclick = () => choiseAnswer(2);
+    document.getElementById("question-ans3").onclick = () => choiseAnswer(3);
+}
+
+function choiseAnswer(index) {
+    console.log("Выбран ответ номер " + index);
 }
 
 function setActiveLevel(level) {
@@ -38,6 +123,17 @@ function setActiveLevel(level) {
         } else {
             tr.classList.remove("active-level");
         }
+    }
+    setQuestion(level);
+}
+
+function setQuestion(level) {
+    let potentialQuestions = questions.filter(q => q.difficalty === level);
+    let randomIndex = Math.round(Math.random() * (potentialQuestions.length - 1));
+    currentQuestion = potentialQuestions[randomIndex];
+    document.getElementById("question-text").innerHTML = currentQuestion.question;
+    for (let i = 0; i < 4; i++) {
+        document.getElementById("question-ans" + i).innerHTML = currentQuestion.answers[i];
     }
 }
 

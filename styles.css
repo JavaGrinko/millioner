@@ -6,7 +6,10 @@ html, body {
 .content {
     width: 1160px;
     margin: 0 auto;
-    background-color: lightblue;
+    background-color: black;
+    background-image: url(images/bg.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100% 70%;
     min-height: 100vh;
     position: relative;
 }

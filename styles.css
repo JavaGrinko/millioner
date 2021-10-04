@@ -103,3 +103,12 @@ tr.active-level td {
 .answer:nth-child(4) {
     background-color: blue;
 }
+
+.answer:hover {
+    background-color: black;
+    color: white;
+}
+
+.answer-correct {
+    background-color: violet!important;
+}

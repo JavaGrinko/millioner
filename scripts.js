@@ -95,6 +95,8 @@ const questions = [{
 
 let currentLevel = 0;
 let currentQuestion;
+let shuffleAnswers;
+let correctAnswer;
 
 window.onload = () => {
     generateLevels();
@@ -109,8 +111,25 @@ function setActions() {
     document.getElementById("question-ans3").onclick = () => choiseAnswer(3);
 }
 
+let ticks = 0;
 function choiseAnswer(index) {
-    console.log("Выбран ответ номер " + index);
+    let ans = document.getElementById("question-ans"+index);
+    let clickedAnswer = shuffleAnswers[index];
+    if (clickedAnswer === correctAnswer) {
+        let interval = setInterval(() => {
+            if (ticks < 10) {
+                console.log('12');
+                ans.classList.toggle("answer-correct");
+                ticks++;
+            } else {
+                currentLevel++;
+                ticks = 0;
+                setActiveLevel(currentLevel);
+                clearInterval(interval);
+            }
+        }, 100);
+        
+    }
 }
 
 function setActiveLevel(level) {
@@ -119,7 +138,6 @@ function setActiveLevel(level) {
         let tr = levelsTable.rows[i];
         if (i === (levels.length - level - 1)) {
             tr.classList.add("active-level");
-            console.log(tr);
         } else {
             tr.classList.remove("active-level");
         }
@@ -131,9 +149,11 @@ function setQuestion(level) {
     let potentialQuestions = questions.filter(q => q.difficalty === level);
     let randomIndex = Math.round(Math.random() * (potentialQuestions.length - 1));
     currentQuestion = potentialQuestions[randomIndex];
+    correctAnswer = currentQuestion.answers[currentQuestion.correctAnswerIndex];
+    shuffleAnswers = currentQuestion.answers.sort( () => .5 - Math.random() );
     document.getElementById("question-text").innerHTML = currentQuestion.question;
     for (let i = 0; i < 4; i++) {
-        document.getElementById("question-ans" + i).innerHTML = currentQuestion.answers[i];
+        document.getElementById("question-ans" + i).innerHTML = shuffleAnswers[i];
     }
 }
 

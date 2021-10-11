@@ -112,3 +112,37 @@ tr.active-level td {
 .answer-correct {
     background-color: violet!important;
 }
+
+.answer-incorrect {
+    background-color: rgb(255, 5, 5)!important;
+}
+
+.shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-over, .winner {
+    width: 50%;
+    height: 20%;
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 42px;
+    font-family: Roboto;
+}
+
+.winner {
+    background-color: white;
+    color: tomato;
+}

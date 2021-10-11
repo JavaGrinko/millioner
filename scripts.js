@@ -118,18 +118,41 @@ function choiseAnswer(index) {
     if (clickedAnswer === correctAnswer) {
         let interval = setInterval(() => {
             if (ticks < 10) {
-                console.log('12');
                 ans.classList.toggle("answer-correct");
                 ticks++;
             } else {
                 currentLevel++;
                 ticks = 0;
-                setActiveLevel(currentLevel);
-                clearInterval(interval);
+                if (currentLevel === levels.length) {
+                    winner();
+                } else {
+                    setActiveLevel(currentLevel);
+                    clearInterval(interval);
+                }
             }
         }, 100);
-        
+    } else {
+        let interval = setInterval(() => {
+            if (ticks < 10) {
+                ans.classList.toggle("answer-incorrect");
+                ticks++;
+            } else {
+                ticks = 0;
+                clearInterval(interval);
+                gameOver();
+            }
+        }, 100);
     }
+}
+
+function gameOver() {
+    let gg = document.getElementById("game-over-container");
+    gg.style["display"] = "flex";
+}
+
+function winner() {
+    let gg = document.getElementById("winner-container");
+    gg.style["display"] = "flex";
 }
 
 function setActiveLevel(level) {

@@ -146,3 +146,23 @@ tr.active-level td {
     background-color: white;
     color: tomato;
 }
+
+.hints {
+    display: flex;
+    position: absolute;
+    left: 16px;
+    top: 16px;
+}
+
+.hint {
+    background-color: brown;
+    padding: 16px;
+    margin-right: 16px;
+    color: white;
+}
+
+.hint-disabled {
+    background-color: gray;
+    color: rgb(49, 49, 49);
+    pointer-events: none;
+}

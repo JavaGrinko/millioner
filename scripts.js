@@ -93,6 +93,12 @@ const questions = [{
     difficalty: 14
 }];
 
+let hints = {
+    fiftyFifty: true,
+    callAFriend: true,
+    viewersHelp: true
+}
+
 let currentLevel = 0;
 let currentQuestion;
 let shuffleAnswers;
@@ -104,11 +110,45 @@ window.onload = () => {
     setActions();
 }
 
+function renderHints() {
+    if (hints.fiftyFifty) {
+        document.getElementById("fifty-fifty").classList.remove("hint-disabled");
+    } else {
+        document.getElementById("fifty-fifty").classList.add("hint-disabled");
+    }
+    if (hints.callAFriend) {
+        document.getElementById("call-a-friend").classList.remove("hint-disabled");
+    } else {
+        document.getElementById("call-a-friend").classList.add("hint-disabled");
+    }
+    if (hints.viewersHelp) {
+        document.getElementById("viewers-help").classList.remove("hint-disabled");
+    } else {
+        document.getElementById("viewers-help").classList.add("hint-disabled");
+    }
+}
+
 function setActions() {
     document.getElementById("question-ans0").onclick = () => choiseAnswer(0);
     document.getElementById("question-ans1").onclick = () => choiseAnswer(1);
     document.getElementById("question-ans2").onclick = () => choiseAnswer(2);
     document.getElementById("question-ans3").onclick = () => choiseAnswer(3);
+    document.getElementById("fifty-fifty").onclick = () => fiftyFifty();
+}
+
+function fiftyFifty() {
+    hints.fiftyFifty = false;
+    renderHints();
+    let toRemove = 2;
+    while (toRemove > 0) {
+        let randomIndex = Math.round(Math.random() * 3);
+        let randomAnswer = shuffleAnswers[randomIndex];
+        let element = document.getElementById("question-ans" + randomIndex);
+        if (randomAnswer !== correctAnswer && element.style['display'] !== 'none') {
+            toRemove--;
+            element.style['display'] = 'none';
+        }
+    }
 }
 
 let ticks = 0;
@@ -176,8 +216,10 @@ function setQuestion(level) {
     shuffleAnswers = currentQuestion.answers.sort( () => .5 - Math.random() );
     document.getElementById("question-text").innerHTML = currentQuestion.question;
     for (let i = 0; i < 4; i++) {
+        document.getElementById("question-ans" + i).style['display'] = 'flex';
         document.getElementById("question-ans" + i).innerHTML = shuffleAnswers[i];
     }
+    renderHints();
 }
 
 function generateLevels() {

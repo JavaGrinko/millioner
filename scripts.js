@@ -134,6 +134,7 @@ function setActions() {
     document.getElementById("question-ans2").onclick = () => choiseAnswer(2);
     document.getElementById("question-ans3").onclick = () => choiseAnswer(3);
     document.getElementById("fifty-fifty").onclick = () => fiftyFifty();
+    document.getElementById("call-a-friend").onclick = () => callAFriend();
 }
 
 function fiftyFifty() {
@@ -193,6 +194,25 @@ function gameOver() {
 function winner() {
     let gg = document.getElementById("winner-container");
     gg.style["display"] = "flex";
+}
+
+function callAFriend() {
+    hints.callAFriend = false;
+    renderHints();
+    let friend = document.getElementById("call-a-friend-container");
+    let friendAnswer = document.getElementById("friend-answer");
+    let friendThankyou = document.getElementById("friend-thankyou");
+    friendAnswer.innerText = "Я думаю, что правильный ответ: " + randomAnswer();
+    friendThankyou.onclick = () => friend.style["display"] = "none";
+    friend.style["display"] = "flex";
+}
+
+function randomAnswer() {
+    let r = Math.random();
+    if (r < 0.25) return "A";
+    if (r < 0.5) return "B";
+    if (r < 0.75) return "C";
+    return "D";
 }
 
 function setActiveLevel(level) {

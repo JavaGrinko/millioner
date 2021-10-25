@@ -166,3 +166,30 @@ tr.active-level td {
     color: rgb(49, 49, 49);
     pointer-events: none;
 }
+
+.call-a-friend {
+    width: 400px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+    padding: 16px 32px 16px 16px;
+}
+
+.call-a-friend img {
+    width: 200px;
+    margin-right: 16px;
+}
+
+.call-a-friend h2 {
+    color: white;
+    font-size: 28px;
+    width: 150px;
+}
+
+.call-a-friend button {
+    margin-top: 16px;
+    width: 100%;
+    background-color: green;
+    font-size: 32px;
+}

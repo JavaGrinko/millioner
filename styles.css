@@ -193,3 +193,35 @@ tr.active-level td {
     background-color: green;
     font-size: 32px;
 }
+
+.bar-chart {
+    height: 200px;
+    width: 100%;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.bar-chart .bar {
+    height: 100px;
+    width: 50px;
+    margin: 0 8px;
+    background-color: yellow;
+    position: relative;
+}
+
+.bar-chart .bar .num {
+    position: absolute;
+    top: -20px;
+    left: 17px;
+    color: white;
+}
+
+.caption {
+    color: white;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin: 8px 64px;
+}

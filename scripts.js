@@ -110,6 +110,17 @@ window.onload = () => {
     setActions();
 }
 
+function viewersRandom() {
+    let r = [0, 0, 0].map(() => Math.random()).sort();
+    let values = [];
+    values[0] = r[0];
+    values[1] = r[1] - r[0];
+    values[2] = r[2] - r[1];
+    values[3] = 1 - r[2];
+    values = values.map(it => Math.round(it * 100)).sort((a, b) => a - b);
+    return values;
+}
+
 function renderHints() {
     if (hints.fiftyFifty) {
         document.getElementById("fifty-fifty").classList.remove("hint-disabled");
@@ -135,6 +146,7 @@ function setActions() {
     document.getElementById("question-ans3").onclick = () => choiseAnswer(3);
     document.getElementById("fifty-fifty").onclick = () => fiftyFifty();
     document.getElementById("call-a-friend").onclick = () => callAFriend();
+    document.getElementById("viewers-help").onclick = () => viewersHelp();
 }
 
 function fiftyFifty() {
@@ -205,6 +217,29 @@ function callAFriend() {
     friendAnswer.innerText = "Я думаю, что правильный ответ: " + randomAnswer();
     friendThankyou.onclick = () => friend.style["display"] = "none";
     friend.style["display"] = "flex";
+}
+
+function viewersHelp() {
+    // hints.viewersHelp = false;
+    renderHints();
+    let viewers = document.getElementById("viewers-help-container");
+    let barChart = document.getElementById("bar-chart");
+    let viewersThankyou = document.getElementById("viewers-thankyou");
+    viewersThankyou.onclick = () => viewers.style["display"] = "none";
+
+    let values = viewersRandom();
+    let correctAnswerIndex = shuffleAnswers.indexOf(correctAnswer);
+    let max = values[3];
+    values[3] = values[correctAnswerIndex];
+    values[correctAnswerIndex] = max;
+    let scale = 2;
+    for (let i = 0; i < 4; i++) {
+        console.log(barChart);
+        barChart.children[i].style["height"] = values[i] * scale + "px";
+        barChart.children[i].children[0].innerText = values[i];
+    }
+
+    viewers.style["display"] = "flex";
 }
 
 function randomAnswer() {

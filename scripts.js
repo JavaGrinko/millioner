@@ -103,11 +103,28 @@ let currentLevel = 0;
 let currentQuestion;
 let shuffleAnswers;
 let correctAnswer;
+let time;
+let timer;
 
 window.onload = () => {
     generateLevels();
     setActiveLevel(currentLevel);
     setActions();
+}
+
+function startTimer() {
+    let timerH2 = document.getElementById("timer");
+    time = 60;
+    if (!timer) {
+        timer = setInterval(() => {
+            time--;
+            timerH2.innerText = time;
+            if (time === 0) {
+                gameOver();
+                clearInterval(timer);
+            }
+        }, 1000);
+    }
 }
 
 function viewersRandom() {
@@ -176,8 +193,10 @@ function choiseAnswer(index) {
             } else {
                 currentLevel++;
                 ticks = 0;
+                startTimer();
                 if (currentLevel === levels.length) {
                     winner();
+                    clearInterval(timer);
                 } else {
                     setActiveLevel(currentLevel);
                     clearInterval(interval);
@@ -220,7 +239,7 @@ function callAFriend() {
 }
 
 function viewersHelp() {
-    // hints.viewersHelp = false;
+    hints.viewersHelp = false;
     renderHints();
     let viewers = document.getElementById("viewers-help-container");
     let barChart = document.getElementById("bar-chart");
@@ -228,15 +247,22 @@ function viewersHelp() {
     viewersThankyou.onclick = () => viewers.style["display"] = "none";
 
     let values = viewersRandom();
-    let correctAnswerIndex = shuffleAnswers.indexOf(correctAnswer);
-    let max = values[3];
-    values[3] = values[correctAnswerIndex];
-    values[correctAnswerIndex] = max;
+    /*
+        При первом вопросе currentLevel = 0, поэтому вероятность точно правильного ответа = 0.8
+        На последнем вопросе currentLevel = 14, поэтому вероятность точно правильного ответа = 0.52
+    */
+    let probabilityCorrectAnswer = 0.8 - currentLevel * 2 / 100;
+    if (Math.random() < probabilityCorrectAnswer) {
+        let correctAnswerIndex = shuffleAnswers.indexOf(correctAnswer);
+        let max = values[3];
+        values[3] = values[correctAnswerIndex];
+        values[correctAnswerIndex] = max;
+    }
     let scale = 2;
     for (let i = 0; i < 4; i++) {
         console.log(barChart);
         barChart.children[i].style["height"] = values[i] * scale + "px";
-        barChart.children[i].children[0].innerText = values[i];
+        barChart.children[i].children[0].innerText = values[i] + "%";
     }
 
     viewers.style["display"] = "flex";
@@ -264,6 +290,7 @@ function setActiveLevel(level) {
 }
 
 function setQuestion(level) {
+    startTimer();
     let potentialQuestions = questions.filter(q => q.difficalty === level);
     let randomIndex = Math.round(Math.random() * (potentialQuestions.length - 1));
     currentQuestion = potentialQuestions[randomIndex];

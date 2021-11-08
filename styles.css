@@ -225,3 +225,18 @@ tr.active-level td {
     justify-content: space-around;
     margin: 8px 64px;
 }
+
+.timer {
+    position: absolute;
+    top: -75;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer h2 {
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+}

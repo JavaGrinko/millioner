@@ -17,15 +17,21 @@ const levels = [
 ];
 
 const questions = [{
-    question: 'Сколько будет 2+2?',
-    answers: ['0', '1', '3', '4'],
-    correctAnswerIndex: 3,
-    difficalty: 0
+    question: 'Что это за передача?',
+    answers: ['КХСМ', 'ПЧ', 'СКО', 'ЧГК'],
+    correctAnswerIndex: 0,
+    difficalty: 0,
+    attachment: {
+        image: 'images/bg.jpeg'
+    }
 }, {
-    question: 'Сколько будет 2+2?',
-    answers: ['0', '1', '3', '4'],
+    question: 'Что это за мультик?',
+    answers: ['Лунтик', 'Поезд динозавров', 'Маша и медведь', 'Телепузики'],
     correctAnswerIndex: 3,
-    difficalty: 1
+    difficalty: 1,
+    attachment: {
+        videoId: 'IoWNdkVUmX8'
+    }
 }, {
     question: 'Сколько будет 2+2?',
     answers: ['0', '1', '3', '4'],
@@ -297,6 +303,16 @@ function setQuestion(level) {
     correctAnswer = currentQuestion.answers[currentQuestion.correctAnswerIndex];
     shuffleAnswers = currentQuestion.answers.sort( () => .5 - Math.random() );
     document.getElementById("question-text").innerHTML = currentQuestion.question;
+    if (currentQuestion.attachment) {
+        if (currentQuestion.attachment.image) {
+            const img = `<img class="question-image" src="${currentQuestion.attachment.image}">`;
+            document.getElementById("question-text").innerHTML += img;
+        }
+        if (currentQuestion.attachment.videoId) {
+            const video = `<iframe class="question-video" width="560" height="315" src="https://www.youtube.com/embed/${currentQuestion.attachment.videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            document.getElementById("question-text").innerHTML += video;
+        }
+    }
     for (let i = 0; i < 4; i++) {
         document.getElementById("question-ans" + i).style['display'] = 'flex';
         document.getElementById("question-ans" + i).innerHTML = shuffleAnswers[i];

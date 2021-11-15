@@ -56,7 +56,7 @@ tr.active-level td {
     bottom: 64px;
     width: 80%;
     margin: 0 10%;
-    height: 250px;
+    height: 350px;
     background-color: lightsalmon;
 }
 
@@ -64,12 +64,13 @@ tr.active-level td {
     position: absolute;
     top: 0;
     width: 80%;
-    height: 100px;
     margin: 0 10%;
+    height: 200px;
     background-color: lightgrey;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .answers {
@@ -239,4 +240,12 @@ tr.active-level td {
     background-color: white;
     padding: 10px;
     border-radius: 8px;
+}
+
+.question-image {
+    height: 150px;
+}
+
+.question-video {
+    height: 150px;
 }

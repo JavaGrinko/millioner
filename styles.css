@@ -56,8 +56,61 @@ tr.active-level td {
     bottom: 64px;
     width: 80%;
     margin: 0 10%;
-    height: 350px;
-    background-color: lightsalmon;
+    height: 370px;
+}
+
+.blue {
+    /* https://cssgradient.io */
+    background: linear-gradient(0deg, rgba(20,5,43,1) 0%, rgba(20,9,100,1) 100%);
+    border: 2px solid #a6a9cd;
+    border-left: none;
+    border-right: none;
+    color: white;
+}
+
+.blue::before {
+    content: "";
+    position: absolute;
+    background: linear-gradient(0deg, rgba(20,5,43,1) 0%, rgba(20,9,100,1) 100%);
+    width: 50px;
+    height: 100%;
+    left: -50px;
+    top: -2px;
+    z-index: 0;
+    border-radius: 50% 0 0 50%;
+    border: 2px solid #a6a9cd;
+    border-right: none;
+}
+
+.blue::after {
+    content: "";
+    position: absolute;
+    background: linear-gradient(0deg, rgba(20,5,43,1) 0%, rgba(20,9,100,1) 100%);
+    width: 50px;
+    height: 100%;
+    right: -50px;
+    top: -2px;
+    z-index: 0;
+    border-radius: 0 50% 50% 0;
+    border: 2px solid #a6a9cd;
+    border-left: none;
+}
+
+.orange:hover, .orange-static {
+    background: linear-gradient(0deg, rgba(247,164,0,1) 0%, rgba(253,255,134,1) 100%);
+    color: black!important;
+}
+
+.orange:hover::before, .orange-static::before {
+    background: linear-gradient(0deg, rgba(247,164,0,1) 0%, rgba(253,255,134,1) 100%);
+}
+
+.orange:hover::after, .orange-static::after {
+    background: linear-gradient(0deg, rgba(247,164,0,1) 0%, rgba(253,255,134,1) 100%);
+}
+
+.red, .red::after, .red::before {
+    background: linear-gradient(0deg, rgba(255,112,112,1) 0%, rgba(255,0,0,1) 100%);
 }
 
 .question {
@@ -66,11 +119,11 @@ tr.active-level td {
     width: 80%;
     margin: 0 10%;
     height: 200px;
-    background-color: lightgrey;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 40px;
 }
 
 .answers {
@@ -82,7 +135,6 @@ tr.active-level td {
     margin: 0 10%;
     position: absolute;
     bottom: 0;
-    background-color: lightyellow;
 }
 
 .answer {
@@ -90,6 +142,8 @@ tr.active-level td {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    margin-bottom: 4px;
 }
 
 .answer:nth-child(1) {
@@ -108,14 +162,6 @@ tr.active-level td {
 .answer:hover {
     background-color: black;
     color: white;
-}
-
-.answer-correct {
-    background-color: violet!important;
-}
-
-.answer-incorrect {
-    background-color: rgb(255, 5, 5)!important;
 }
 
 .shadow {

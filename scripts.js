@@ -27,7 +27,7 @@ const questions = [{
 }, {
     question: 'Что это за мультик?',
     answers: ['Лунтик', 'Поезд динозавров', 'Маша и медведь', 'Телепузики'],
-    correctAnswerIndex: 3,
+    correctAnswerIndex: 1,
     difficalty: 1,
     attachment: {
         videoId: 'IoWNdkVUmX8'
@@ -194,7 +194,7 @@ function choiseAnswer(index) {
     if (clickedAnswer === correctAnswer) {
         let interval = setInterval(() => {
             if (ticks < 10) {
-                ans.classList.toggle("answer-correct");
+                ans.classList.toggle("orange-static");
                 ticks++;
             } else {
                 currentLevel++;
@@ -212,7 +212,7 @@ function choiseAnswer(index) {
     } else {
         let interval = setInterval(() => {
             if (ticks < 10) {
-                ans.classList.toggle("answer-incorrect");
+                ans.classList.toggle("red");
                 ticks++;
             } else {
                 ticks = 0;

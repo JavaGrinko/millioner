@@ -45,10 +45,39 @@ html, body {
 
 tr.active-level {
     background-color: rgb(255, 153, 0);
+    position: relative;
+}
+
+tr.active-level::before {
+    content: "";
+    width: 0; 
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 10px solid rgb(255, 153, 0);;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: -10px;
+}
+
+tr.active-level::after {
+    content: "";
+    width: 0; 
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 10px solid rgb(255, 153, 0);;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    right: -10px;
 }
 
 tr.active-level td {
     color: #000000;
+}
+
+tr.active-level td:first-child {
+    position: absolute;
 }
 
 .controls {

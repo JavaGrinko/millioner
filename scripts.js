@@ -105,6 +105,10 @@ let hints = {
     viewersHelp: true
 }
 
+let circleCanvas;
+let circleContext;
+let circleWidth = 50;
+let circleHeight = 54;
 let currentLevel = 0;
 let currentQuestion;
 let shuffleAnswers;
@@ -116,6 +120,10 @@ window.onload = () => {
     generateLevels();
     setActiveLevel(currentLevel);
     setActions();
+    circleCanvas = document.getElementById('timer-circle');
+    circleContext = circleCanvas.getContext('2d');
+    circleCanvas.height = circleHeight;
+    circleCanvas.width = circleWidth;
 }
 
 function startTimer() {
@@ -125,12 +133,28 @@ function startTimer() {
         timer = setInterval(() => {
             time--;
             timerH2.innerText = time;
+            drawCircle(time);
             if (time === 0) {
                 gameOver();
                 clearInterval(timer);
             }
         }, 1000);
     }
+}
+
+function drawCircle(time) {
+    circleContext.clearRect(0, 0, circleWidth, circleHeight);
+    circleContext.beginPath();
+    circleContext.lineWidth = 2;
+    circleContext.strokeStyle = "green";
+    let x = circleWidth / 2;
+    let y = circleHeight / 2;
+    let radius = circleWidth / 2 - 1;
+    let startAngle = -Math.PI / 2;
+    let endAngle = Math.PI * 1.5;
+    let delta = 2 * Math.PI - (time / 60 * 2 * Math.PI);
+    circleContext.arc(x, y, radius, startAngle + delta, endAngle, false);
+    circleContext.stroke();
 }
 
 function viewersRandom() {
